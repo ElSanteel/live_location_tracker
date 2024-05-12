@@ -74,17 +74,47 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
     }
   }
 
-  // step 2 : method to check if location permission is granted or not
-  Future<void> checkAndRequestLocationPermission() async {
+  // // step 2 : method to check if location permission is granted or not ( first way )
+  // Future<bool> checkAndRequestLocationPermission() async {
+  //   // check if location permission is granted or not
+  //   var permissionStatus = await location.hasPermission();
+  //   if (permissionStatus == PermissionStatus.denied) {
+  //     // request location permission
+  //     permissionStatus = await location.requestPermission();
+  //     if (permissionStatus != PermissionStatus.granted) {
+  //       return false;
+  //     } else {
+  //       return true;
+  //     }
+  //   } else {
+  //     if (permissionStatus == PermissionStatus.deniedForever) {
+  //       return false;
+  //     } else {
+  //       return true;
+  //     }
+  //   }
+  // }
+
+  // step 2 : method to check if location permission is granted or not ( second way )
+  Future<bool> checkAndRequestLocationPermission() async {
     // check if location permission is granted or not
     var permissionStatus = await location.hasPermission();
+    // check if the permission is denied forever
+    if (permissionStatus == PermissionStatus.deniedForever) {
+      return false;
+    }
+    // check if the permission is denied
     if (permissionStatus == PermissionStatus.denied) {
       // request location permission
       permissionStatus = await location.requestPermission();
+      // check if the permission is not granted
       if (permissionStatus != PermissionStatus.granted) {
-        // TODO: show error bar
+        // return false if the permission is not granted and the user denied the permission
+        return false;
       }
     }
+    // return true if the permission is granted and the user allowed the permission
+    return true;
   }
 
   // step 3 : method to get the user location data
@@ -94,8 +124,10 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
 
   void updateMyLocation() async {
     await checkAndRequestLocationService();
-    await checkAndRequestLocationPermission();
-    getLocationData();
+    var hasPermission = await checkAndRequestLocationPermission();
+    if (hasPermission) {
+      getLocationData();
+    } else {}
   }
 }
 
