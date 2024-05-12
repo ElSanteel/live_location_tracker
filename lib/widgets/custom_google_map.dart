@@ -54,6 +54,11 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
     circles.add(koshryAbuTarekServiceCircle);
   }
 }
+
+// request permission
+// get location
+// display
+
 // world view 0 -> 3
 // country view 4-> 6
 // city view 10 -> 12

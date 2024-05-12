@@ -49,7 +49,7 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
-    - assets/map_syles/night_map_style.json
+    - assets/map_styles/night_map_style.json
     - assets/images/icons8-marker-50.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
