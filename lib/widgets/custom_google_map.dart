@@ -15,15 +15,15 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
 
   // we have made the googleMapController nullable because we are sure that it will be initialized in the onMapCreated callback
   GoogleMapController? googleMapController;
-
   late Location location;
+  // we have made markers set
+  Set<Marker> markers = {};
 
   @override
   void initState() {
     initialCameraPosition = const CameraPosition(
         zoom: 17, target: LatLng(31.187084851056554, 29.928110526889437));
 
-    // initCircles();
     location = Location();
 
     updateMyLocation();
@@ -34,7 +34,7 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
   @override
   Widget build(BuildContext context) {
     return GoogleMap(
-      // circles: circles,
+      markers: markers,
       zoomControlsEnabled: false,
       onMapCreated: (controller) {
         googleMapController = controller;
@@ -50,16 +50,6 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
 
     googleMapController!.setMapStyle(nightMapStyle);
   }
-
-  // void initCircles() {
-  //   Circle koshryAbuTarekServiceCircle = Circle(
-  //       fillColor: Colors.black.withOpacity(.5),
-  //       center: const LatLng(30.050250485630052, 31.237686871310093),
-  //       radius: 10000,
-  //       circleId: const CircleId('1'));
-  //
-  //   circles.add(koshryAbuTarekServiceCircle);
-  // }
 
   // step 1 : method to check if location service is enabled or not
   Future<void> checkAndRequestLocationService() async {
@@ -123,10 +113,22 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
       (locationData) {
         // create a camera position object with the user location
         var cameraPosition = CameraPosition(
-          target: LatLng(locationData.latitude!, locationData.longitude!),
-        );
-        // animate the camera to the user location
+            target: LatLng(locationData.latitude!, locationData.longitude!),
+            zoom: 12);
 
+        // create a marker for the user location
+        var myLocationMarker = Marker(
+          markerId: const MarkerId('my_location_marker'),
+          position: LatLng(locationData.latitude!, locationData.longitude!),
+        );
+
+        // add the marker to the markers set
+        markers.add(myLocationMarker);
+
+        // update the state to rebuild the widget cuz animateCamera method will not rebuild the widget , it just change the position of the camera
+        setState(() {});
+
+        // animate the camera to the user location
         // ? -> null safety operator used here to check if the googleMapController is null or not
         // so if the googleMapController is null the animateCamera method will not be called
         googleMapController
