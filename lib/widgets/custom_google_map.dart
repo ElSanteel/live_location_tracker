@@ -36,7 +36,6 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
       onMapCreated: (controller) {
         googleMapController = controller;
         initMapStyle();
-
         location.onLocationChanged.listen((locationData) {});
       },
       initialCameraPosition: initialCameraPosition,
@@ -60,7 +59,7 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
   //   circles.add(koshryAbuTarekServiceCircle);
   // }
 
-  // method to check if location service is enabled or not
+  // step 1 : method to check if location service is enabled or not
   void checkAndRequestLocationService() async {
     // check if location service is enabled or not
     var isServiceEnabled = await location.serviceEnabled();
@@ -72,9 +71,9 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
         return;
       }
     }
-    checkAndRequestLocationPermission();
   }
 
+  // step 2 : method to check if location permission is granted or not
   void checkAndRequestLocationPermission() async {
     // check if location permission is granted or not
     var permissionStatus = await location.hasPermission();
@@ -86,6 +85,9 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
       }
     }
   }
+
+  // step 3 : method to get the user location data
+  void getLocationData() {}
 }
 
 // steps to get the user location

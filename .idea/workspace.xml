@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0689fc3b-8746-4b6a-8960-74f933867de4" name="Changes" comment="check and request location permission" />
+    <list default="true" id="0689fc3b-8746-4b6a-8960-74f933867de4" name="Changes" comment="get location part 1">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/widgets/custom_google_map.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/custom_google_map.dart" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -154,7 +157,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715523953548</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="get location part 1">
+      <option name="closed" value="true" />
+      <created>1715524466797</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1715524466797</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -182,6 +193,7 @@
     <MESSAGE value="steps to get user location" />
     <MESSAGE value="check and request location service" />
     <MESSAGE value="check and request location permission" />
-    <option name="LAST_COMMIT_MESSAGE" value="check and request location permission" />
+    <MESSAGE value="get location part 1" />
+    <option name="LAST_COMMIT_MESSAGE" value="get location part 1" />
   </component>
 </project>
