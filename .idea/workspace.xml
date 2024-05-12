@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0689fc3b-8746-4b6a-8960-74f933867de4" name="Changes" comment="steps to get user location">
+    <list default="true" id="0689fc3b-8746-4b6a-8960-74f933867de4" name="Changes" comment="check and request location service">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/widgets/custom_google_map.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/custom_google_map.dart" afterDir="false" />
     </list>
@@ -141,7 +141,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715519971400</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="check and request location service">
+      <option name="closed" value="true" />
+      <created>1715520490401</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1715520490401</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -167,6 +175,7 @@
     <MESSAGE value="rename map_syle folder to map_style" />
     <MESSAGE value="rename map_syle folder to map_style and fix pubspec.yaml error" />
     <MESSAGE value="steps to get user location" />
-    <option name="LAST_COMMIT_MESSAGE" value="steps to get user location" />
+    <MESSAGE value="check and request location service" />
+    <option name="LAST_COMMIT_MESSAGE" value="check and request location service" />
   </component>
 </project>

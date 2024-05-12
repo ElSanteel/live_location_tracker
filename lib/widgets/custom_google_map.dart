@@ -70,12 +70,25 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
         return;
       }
     }
+    checkAndRequestLocationPermission();
+  }
+
+  void checkAndRequestLocationPermission() async {
+    // check if location permission is granted or not
+    var permissionStatus = await location.hasPermission();
+    if (permissionStatus == PermissionStatus.denied) {
+      // request location permission
+      permissionStatus = await location.requestPermission();
+      if (permissionStatus != PermissionStatus.granted) {
+        // TODO: show error bar
+      }
+    }
   }
 }
 
 // steps to get the user location
-// inquire about location service or check if location service is enabled or not ?
-// request permission
+// inquire about location service or check if location service is enabled or not ?  --> done
+// request permission --> done
 // get location
 // display
 
