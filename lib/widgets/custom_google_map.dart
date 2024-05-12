@@ -23,7 +23,8 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
 
     // initCircles();
     location = Location();
-    checkAndRequestLocationService();
+
+    updateMyLocation();
     super.initState();
   }
 
@@ -60,7 +61,7 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
   // }
 
   // step 1 : method to check if location service is enabled or not
-  void checkAndRequestLocationService() async {
+  Future<void> checkAndRequestLocationService() async {
     // check if location service is enabled or not
     var isServiceEnabled = await location.serviceEnabled();
     if (!isServiceEnabled) {
@@ -74,7 +75,7 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
   }
 
   // step 2 : method to check if location permission is granted or not
-  void checkAndRequestLocationPermission() async {
+  Future<void> checkAndRequestLocationPermission() async {
     // check if location permission is granted or not
     var permissionStatus = await location.hasPermission();
     if (permissionStatus == PermissionStatus.denied) {
@@ -87,7 +88,15 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
   }
 
   // step 3 : method to get the user location data
-  void getLocationData() {}
+  void getLocationData() {
+    location.onLocationChanged.listen((locationData) {});
+  }
+
+  void updateMyLocation() async {
+    await checkAndRequestLocationService();
+    await checkAndRequestLocationPermission();
+    getLocationData();
+  }
 }
 
 // steps to get the user location
