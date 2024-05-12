@@ -39,7 +39,6 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
       onMapCreated: (controller) {
         googleMapController = controller;
         initMapStyle();
-        location.onLocationChanged.listen((locationData) {});
       },
       initialCameraPosition: initialCameraPosition,
     );
@@ -70,8 +69,7 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
       // request location service
       isServiceEnabled = await location.requestService();
       if (!isServiceEnabled) {
-        //TODO: show error bar
-        return;
+        // TODO: show error bar
       }
     }
   }
@@ -121,17 +119,20 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
 
   // step 3 : method to get the user location data
   void getLocationData() {
-    location.onLocationChanged.listen((locationData) {
-      // create a camera position object with the user location
-      var cameraPosition = CameraPosition(
-          target: LatLng(locationData.latitude!, locationData.longitude!));
-      // animate the camera to the user location
+    location.onLocationChanged.listen(
+      (locationData) {
+        // create a camera position object with the user location
+        var cameraPosition = CameraPosition(
+          target: LatLng(locationData.latitude!, locationData.longitude!),
+        );
+        // animate the camera to the user location
 
-      // ? -> null safety operator used here to check if the googleMapController is null or not
-      // so if the googleMapController is null the animateCamera method will not be called
-      googleMapController
-          ?.animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
-    });
+        // ? -> null safety operator used here to check if the googleMapController is null or not
+        // so if the googleMapController is null the animateCamera method will not be called
+        googleMapController
+            ?.animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
+      },
+    );
   }
 
   void updateMyLocation() async {
