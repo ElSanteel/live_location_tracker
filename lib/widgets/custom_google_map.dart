@@ -12,7 +12,9 @@ class CustomGoogleMap extends StatefulWidget {
 
 class _CustomGoogleMapState extends State<CustomGoogleMap> {
   late CameraPosition initialCameraPosition;
-  late GoogleMapController googleMapController;
+
+  // we have made the googleMapController nullable because we are sure that it will be initialized in the onMapCreated callback
+  GoogleMapController? googleMapController;
 
   late Location location;
 
@@ -47,7 +49,7 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
     var nightMapStyle = await DefaultAssetBundle.of(context)
         .loadString('assets/map_styles/night_map_style.json');
 
-    googleMapController.setMapStyle(nightMapStyle);
+    googleMapController!.setMapStyle(nightMapStyle);
   }
 
   // void initCircles() {
@@ -119,7 +121,17 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
 
   // step 3 : method to get the user location data
   void getLocationData() {
-    location.onLocationChanged.listen((locationData) {});
+    location.onLocationChanged.listen((locationData) {
+      // create a camera position object with the user location
+      var cameraPosition = CameraPosition(
+          target: LatLng(locationData.latitude!, locationData.longitude!));
+      // animate the camera to the user location
+
+      // ? -> null safety operator used here to check if the googleMapController is null or not
+      // so if the googleMapController is null the animateCamera method will not be called
+      googleMapController
+          ?.animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
+    });
   }
 
   void updateMyLocation() async {
