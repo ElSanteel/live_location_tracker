@@ -36,6 +36,8 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
       onMapCreated: (controller) {
         googleMapController = controller;
         initMapStyle();
+
+        location.onLocationChanged.listen((locationData) {});
       },
       initialCameraPosition: initialCameraPosition,
     );
