@@ -20,11 +20,12 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
   Set<Marker> markers = {};
   // we have made locationService object
   late LocationService locationService;
+  bool isFirstCall = true;
 
   @override
   void initState() {
     initialCameraPosition = const CameraPosition(
-        zoom: 17, target: LatLng(31.187084851056554, 29.928110526889437));
+        zoom: 1, target: LatLng(31.187084851056554, 29.928110526889437));
 
     // we have initialized the locationService object
     locationService = LocationService();
@@ -63,22 +64,30 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
         setMyLocationMarker(locationData);
 
         // set the camera position to the user location
-        setMyCameraPosition(locationData);
+        updateMyCamera(locationData);
       });
     } else {}
   }
 
-  void setMyCameraPosition(LocationData locationData) {
-    // create a camera position object with the user location
-    var cameraPosition = CameraPosition(
-        target: LatLng(locationData.latitude!, locationData.longitude!),
-        zoom: 12);
+  void updateMyCamera(LocationData locationData) {
+    if (isFirstCall) {
+      CameraPosition cameraPosition = CameraPosition(
+          target: LatLng(locationData.latitude!, locationData.longitude!),
+          zoom: 17);
 
-    // animate the camera to the user location
-    // ? -> null safety operator used here to check if the googleMapController is null or not
-    // so if the googleMapController is null the animateCamera method will not be called
-    googleMapController
-        ?.animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
+      // animate the camera to the user location
+      // ? -> null safety operator used here to check if the googleMapController is null or not
+      // so if the googleMapController is null the animateCamera method will not be called
+      googleMapController
+          ?.animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
+      isFirstCall = false;
+    } else {
+      // animate the camera to the user location
+      // ? -> null safety operator used here to check if the googleMapController is null or not
+      // so if the googleMapController is null the animateCamera method will not be called
+      googleMapController?.animateCamera(CameraUpdate.newLatLng(
+          LatLng(locationData.latitude!, locationData.longitude!)));
+    }
   }
 
   void setMyLocationMarker(LocationData locationData) {
