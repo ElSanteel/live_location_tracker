@@ -55,6 +55,8 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
   }
 }
 
+// steps to get the user location
+// inquire about location service or check if location service is enabled or not ?
 // request permission
 // get location
 // display
