@@ -10,12 +10,12 @@ class CustomGoogleMap extends StatefulWidget {
 }
 
 class _CustomGoogleMapState extends State<CustomGoogleMap> {
-  late CameraPosition initialCameraPostion;
+  late CameraPosition initialCameraPosition;
 
   @override
   void initState() {
-    initialCameraPostion = const CameraPosition(
-        zoom: 1, target: LatLng(31.187084851056554, 29.928110526889437));
+    initialCameraPosition = const CameraPosition(
+        zoom: 17, target: LatLng(31.187084851056554, 29.928110526889437));
 
     initCircles();
     super.initState();
@@ -33,7 +33,7 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
         googleMapController = controller;
         initMapStyle();
       },
-      initialCameraPosition: initialCameraPostion,
+      initialCameraPosition: initialCameraPosition,
     );
   }
 
