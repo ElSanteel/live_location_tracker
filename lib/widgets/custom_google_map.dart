@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:location/location.dart';
 
 class CustomGoogleMap extends StatefulWidget {
   const CustomGoogleMap({super.key});
@@ -11,23 +12,26 @@ class CustomGoogleMap extends StatefulWidget {
 
 class _CustomGoogleMapState extends State<CustomGoogleMap> {
   late CameraPosition initialCameraPosition;
+  late GoogleMapController googleMapController;
+
+  late Location location;
 
   @override
   void initState() {
     initialCameraPosition = const CameraPosition(
         zoom: 17, target: LatLng(31.187084851056554, 29.928110526889437));
 
-    initCircles();
+    // initCircles();
+    location = Location();
+    checkAndRequestLocationService();
     super.initState();
   }
 
-  late GoogleMapController googleMapController;
-
-  Set<Circle> circles = {};
+  // Set<Circle> circles = {};
   @override
   Widget build(BuildContext context) {
     return GoogleMap(
-      circles: circles,
+      // circles: circles,
       zoomControlsEnabled: false,
       onMapCreated: (controller) {
         googleMapController = controller;
@@ -44,14 +48,28 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
     googleMapController.setMapStyle(nightMapStyle);
   }
 
-  void initCircles() {
-    Circle koshryAbuTarekServiceCircle = Circle(
-        fillColor: Colors.black.withOpacity(.5),
-        center: const LatLng(30.050250485630052, 31.237686871310093),
-        radius: 10000,
-        circleId: const CircleId('1'));
+  // void initCircles() {
+  //   Circle koshryAbuTarekServiceCircle = Circle(
+  //       fillColor: Colors.black.withOpacity(.5),
+  //       center: const LatLng(30.050250485630052, 31.237686871310093),
+  //       radius: 10000,
+  //       circleId: const CircleId('1'));
+  //
+  //   circles.add(koshryAbuTarekServiceCircle);
+  // }
 
-    circles.add(koshryAbuTarekServiceCircle);
+  // method to check if location service is enabled or not
+  void checkAndRequestLocationService() async {
+    // check if location service is enabled or not
+    var isServiceEnabled = await location.serviceEnabled();
+    if (!isServiceEnabled) {
+      // request location service
+      isServiceEnabled = await location.requestService();
+      if (!isServiceEnabled) {
+        //TODO: show error bar
+        return;
+      }
+    }
   }
 }
 
