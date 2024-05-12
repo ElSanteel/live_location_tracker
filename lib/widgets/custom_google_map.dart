@@ -51,7 +51,7 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
     googleMapController!.setMapStyle(nightMapStyle);
   }
 
-  // step 1 : method to check if location service is enabled or not
+  // step 1 : method to check if location service is enabled or not..
   Future<void> checkAndRequestLocationService() async {
     // check if location service is enabled or not
     var isServiceEnabled = await location.serviceEnabled();
@@ -109,6 +109,8 @@ class _CustomGoogleMapState extends State<CustomGoogleMap> {
 
   // step 3 : method to get the user location data
   void getLocationData() {
+    location.changeSettings(distanceFilter: 2);
+
     location.onLocationChanged.listen(
       (locationData) {
         // create a camera position object with the user location
